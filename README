@@ -1,0 +1,15 @@
+A failed but fun attempt to create a game skeleton written in Go.
+
+I did wrong and what I learned :
+
+- don't use pixels as world coordinates
+- think about a simple game logic system first
+- don't have high expectations, do simple things
+- tiles were not the right solution for this game
+
+What worked :
+
+- Ogmo scenes import (https://ogmo-editor-3.github.io/#), and Ogmo is a very cool tool btw
+- Dual backend windows/sdl and wasm/browser
+- Staying away from OpenGl/WebGl, pure Go image buffers are fast enough for 2D games
+

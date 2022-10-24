@@ -1,0 +1,6 @@
+entr*
+.DS_*
+www/mazox.wasm
+.~*
+.vscode
+mazox

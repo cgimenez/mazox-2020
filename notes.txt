@@ -1,0 +1,15 @@
+m := image.NewRGBA(image.Rect(0, 0, 500, 500))
+		blue := color.RGBA{0, 0, 255, 255}
+		draw.Draw(m, m.Bounds(), &image.Uniform{blue}, image.ZP, draw.Src)
+		var buff bytes.Buffer
+		enc := &png.Encoder{
+			CompressionLevel: png.NoCompression,
+		}
+		enc.Encode(&buff, m)
+		encodedString := "data:image/png;base64," + base64.StdEncoding.EncodeToString(buff.Bytes())
+		zimage := js.Global().Call("eval", "new Image()")
+		zimage.Set("src", encodedString)
+		ctx.Call("drawImage", zimage, 0, 0)
+
+
+find . -name '*.go' | ./entr -r go test -v -tags engine_test game/*.go

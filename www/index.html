@@ -1,0 +1,58 @@
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async src="watcher.js"></script>
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(fetch("mazox.wasm?" + Date.now()), go.importObject).then((result) => {
+        go.run(result.instance);
+      });
+
+    </script>
+
+    <script>
+      window.addEventListener("load", (e) => {
+        var btn = document.querySelector("#fscreen")
+        btn.addEventListener("click", (e) => {
+          var elem = document.querySelector("canvas")
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+          } else if (elem.mozRequestFullScreen) {
+            /* Firefox */
+            elem.mozRequestFullScreen();
+          } else if (elem.webkitRequestFullscreen) {
+            /* Chrome, Safari & Opera */
+            elem.webkitRequestFullscreen();
+          } else if (elem.msRequestFullscreen) {
+            /* IE/Edge */
+            elem.msRequestFullscreen();
+          }
+        })
+      })
+
+    </script>
+    <style>
+      canvas {
+        position: absolute;
+        width: 640px;
+        height: 320px;
+        left: 50%;
+        top: 50%;
+        margin-left: -320px;
+        /* This is half the width */
+        margin-top: -180px;
+        background-color: red;
+        cursor: none;
+      }
+
+    </style>
+  </head>
+
+  <body style="margin: 0; padding: 0; background-color: black;">
+    <button id="fscreen">Fullscreen Mode</button>
+  </body>
+
+</html>
